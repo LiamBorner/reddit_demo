@@ -11,17 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :link_title %>
+  <div class="form-group">
+    <%= form.label :title %><br>
+    <%= form.text_field :title, id: :link_title, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :url %>
-    <%= form.text_field :url, id: :link_url %>
+    <%= form.text_field :url, id: :link_url, class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.submit "Submit", class: "btn btn-primary btn-lg" %>
   </div>
 <% end %>
