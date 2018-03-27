@@ -3,9 +3,16 @@ class LinksController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   # GET /links
   # GET /links.json
+
+
+
   def index
-    @links = Link.all
+  @links = if params[:term]
+    Link.where('title LIKE ?', "%#{params[:term]}%")
+  else
+    Link.all
   end
+end
 
   # GET /links/1
   # GET /links/1.json
@@ -81,6 +88,7 @@ class LinksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def link_params
-      params.require(:link).permit(:title, :url)
+      params.require(:link).permit(:title, :url, :term)
+
     end
 end

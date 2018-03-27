@@ -24,11 +24,20 @@
                   <li><%= link_to 'Sign in', new_user_session_path %></li>
                 </ul>
               <%end %>
+
+
+
           </nav>
         </div>
       </div>
     </header>
 
+<div>
+    <%= form_tag(links_path, method: :get)  do %>
+    <%= text_field_tag :term %>
+    <%= submit_tag "Run it" %>
+</div>    
+<% end %>
     <div id="main_content" class="container">
         <%= flash.each do |name, msg| %>
         <%= content_tag(:div, msg, class: "alert alert-info") %>
