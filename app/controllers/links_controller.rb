@@ -1,4 +1,5 @@
 class LinksController < ApplicationController
+  load_and_authorize_resource
   before_action :set_link, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
   # GET /links
@@ -22,6 +23,7 @@ end
   # GET /links/new
   def new
     @link = current_user.links.build
+
   end
 
   # GET /links/1/edit
@@ -33,9 +35,10 @@ end
   def create
     @link = current_user.links.build(link_params)
 
+
     respond_to do |format|
       if @link.save
-        format.html { redirect_to @link, notice: 'Link was successfully created.' }
+        format.html { redirect_to links_url, notice: 'Link was successfully created. Congrats buddy' }
         format.json { render :show, status: :created, location: @link }
       else
         format.html { render :new }
@@ -63,7 +66,7 @@ end
   def destroy
     @link.destroy
     respond_to do |format|
-      format.html { redirect_to links_url, notice: 'Link was successfully destroyed.' }
+      format.html { redirect_to links_url, notice: 'Your post was deleted.' }
       format.json { head :no_content }
     end
   end
