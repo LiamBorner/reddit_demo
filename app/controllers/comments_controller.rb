@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @link = Link.find(params[:link_id])
+
     @comment = @link.comments.new(comment_params)
     @comment.user = current_user
 
@@ -33,9 +34,10 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
+    @link = @comment.link
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_to link_path(@link.id), notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
